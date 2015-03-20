@@ -1,14 +1,74 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Employees</title>
     </h:head>
     <h:body>
-        Hello from Facelets
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
+        <ui:composition template="template-simple.xhtml">
+       <ui:define name="title">
+                Employees - Resort
+            </ui:define>
+
+            <ui:define name="content">
+                <h1>List of all employees<br/><br/></h1>
+               <ul>
+                   <ui:repeat value="${Employee.dto.list}" var="listDetail">
+                        <li><a href="index.xhtml?edit=${listDetail.id}"><b>${listDetail.firstName} ${listDetail.lastName} </b>  ${listDetail.email}</a><br/></li>
+                    </ui:repeat>
+                </ul>
+                <h:form>
+                    <h:inputText value="${Employee.dto.detail.id}"/>
+                    <span class="input-group-addon">First Name</span>
+                    <h:inputText label="firstName" 
+                                 value="${Employee.dto.detail.firstName}" class="form-control"
+                                 required="true">
+                    </h:inputText>
+                    <span class="input-group-addon">Last Name</span>
+                    <h:inputText label="lastName" 
+                                 value="${Employee.dto.detail.lastName}" class="form-control"
+                                 required="true">
+                    </h:inputText>
+                    <span class="input-group-addon">Email</span>
+                    <h:inputText label="empEmail" 
+                                 value="${Employee.dto.detail.email}" class="form-control"
+                                 required="true">
+                   </h:inputText>
+                    <span class="input-group-addon">Beginuur</span>
+                    <h:inputText label="empStarthr" 
+                                 value="${Employee.dto.detail.starthr}" class="form-control"
+                                 required="true">
+                    </h:inputText>
+                    <span class="input-group-addon">Einduur</span>
+                      <h:inputText label="empEndhr" 
+                                 value="${Employee.dto.detail.endhr}" class="form-control"
+                                 required="true">
+                    </h:inputText>
+                     <span class="input-group-addon">Job</span>
+                      <h:inputText label="empJob" 
+                                 value="${Employee.dto.detail.job}" class="form-control"
+                                 required="true">
+                    </h:inputText>
+                    <span class="input-group-addon">Address</span>
+                    <h:inputText label="empAddress" 
+                                 value="${Employee.dto.detail.address}" class="form-control"
+                                 required="true">
+                    </h:inputText>
+                    <span class="input-group-addon">Phone Number</span>
+                    <h:inputText label="empPhone" 
+                                 value="${Employee.dto.detail.phone}" class="form-control"
+                                 required="false">
+                    </h:inputText>
+                    <h:commandButton class="btn btn-primary" action="${Employee.save()}" value="Save"></h:commandButton>
+                <br/>
+                <br/>
+                    <h:commandButton class="btn btn-primary" action="${Employee.delete()}" value="Delete"></h:commandButton>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
     </h:body>
 </html>
 
